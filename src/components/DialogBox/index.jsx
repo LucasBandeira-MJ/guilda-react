@@ -1,10 +1,13 @@
+import { useContext } from 'react'
 import './DialogBox.styles.sass'
+import { QuestsContext } from '@context/QuestsContext'
 
 export const DialogBox = () => {
+  const { dialog } = useContext(QuestsContext)
   return (
     <div className="dialogContainer">
-      <h2>Hello adventurer!</h2>
-      <p>What can I help you with today?</p>
+      <h2>{dialog.header}</h2>
+      <p>{dialog.body}</p>
     </div>
   )
 }

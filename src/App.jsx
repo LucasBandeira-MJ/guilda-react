@@ -12,7 +12,9 @@ function App() {
   return (
     <div className="container">
       <DialogBox />
-      {questStatus !== 'frontDesk' && <Quest />}
+      {(questStatus === 'requesting' || questStatus === 'accepted') && (
+        <Quest />
+      )}
       <ControlBox />
     </div>
   )

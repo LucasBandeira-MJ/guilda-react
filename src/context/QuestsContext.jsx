@@ -31,7 +31,7 @@ export const QuestsProvider = ({ children }) => {
     setQuestStatus('rejected')
 
     setDialog({
-      header: 'Sorry to hear',
+      header: 'Sorry to hear...',
       body: 'Please let me know if I can be of any more help.',
     })
   }
