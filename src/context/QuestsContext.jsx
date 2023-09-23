@@ -8,6 +8,7 @@ export const QuestsContext = createContext()
 
 export const QuestsProvider = ({ children }) => {
   const [questStatus, setQuestStatus] = useState('frontdesk')
+  const [isReturning, setIsReturning] = useState(true)
   const [quest, setQuest] = useState({})
   const [dialog, setDialog] = useState(dialogOptions.frontDesk)
 
@@ -17,14 +18,14 @@ export const QuestsProvider = ({ children }) => {
   )
 
   useEffect(() => {
-    if (!activeQuest) {
+    if (!activeQuest || !isReturning) {
       return
     }
 
     setDialog(dialogOptions.returning)
     setQuestStatus('active')
     setQuest(activeQuest)
-  }, [activeQuest])
+  }, [activeQuest, isReturning])
 
   const getRandomQuest = () => {
     const questNumber = Math.floor(Math.random() * questOptions.length)
@@ -39,15 +40,31 @@ export const QuestsProvider = ({ children }) => {
   }
 
   const acceptQuest = () => {
-    setQuestStatus('accepted')
+    setQuestStatus('active')
     setDialog(dialogOptions.accepted)
 
+    setIsReturning(false)
     setActiveQuest(quest)
   }
 
   const rejectQuest = () => {
+    console.log('rejecting')
     setQuestStatus('frontdesk')
     setDialog(dialogOptions.rejected)
+
+    clearActiveQuest()
+  }
+
+  const completeQuest = () => {
+    setQuestStatus('frontdesk')
+    setDialog(dialogOptions.completed)
+
+    clearActiveQuest()
+  }
+
+  const abandonQuest = () => {
+    setQuestStatus('frontdesk')
+    setDialog(dialogOptions.abandoned)
 
     clearActiveQuest()
   }
@@ -61,6 +78,8 @@ export const QuestsProvider = ({ children }) => {
         requestQuest,
         acceptQuest,
         rejectQuest,
+        completeQuest,
+        abandonQuest,
       }}
     >
       {children}

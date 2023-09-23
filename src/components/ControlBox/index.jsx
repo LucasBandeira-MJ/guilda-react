@@ -3,43 +3,47 @@ import { useContext } from 'react'
 import './ControlBox.styles.sass'
 import { QuestsContext } from '@context/QuestsContext'
 import { ChevronRight } from '../ChevronRight'
+import { ControlButton } from '../ControlButton'
 
 export const ControlBox = () => {
-  const { questStatus, requestQuest, acceptQuest, rejectQuest } =
-    useContext(QuestsContext)
+  const {
+    questStatus,
+    requestQuest,
+    acceptQuest,
+    rejectQuest,
+    completeQuest,
+    abandonQuest,
+  } = useContext(QuestsContext)
 
   return (
     <div className="controlBox">
       {questStatus === 'frontdesk' && (
-        <button type="button" onClick={requestQuest}>
-          <ChevronRight />
+        <ControlButton onButtonClick={requestQuest}>
           Give me a quest!
-        </button>
+        </ControlButton>
       )}
 
       {questStatus === 'random' && (
         <>
-          <button type="button" onClick={rejectQuest}>
-            <ChevronRight />I don't wanna do that!
-          </button>
-
-          <button type="button" onClick={acceptQuest}>
-            <ChevronRight />
+          <ControlButton onButtonClick={acceptQuest}>
             Sounds great, let's do this!
-          </button>
+          </ControlButton>
+
+          <ControlButton onButtonClick={rejectQuest}>
+            I don't wanna do that!
+          </ControlButton>
         </>
       )}
 
       {questStatus === 'active' && (
         <>
-          <button type="button" onClick={rejectQuest}>
-            <ChevronRight /> Complete Quest
-          </button>
+          <ControlButton onButtonClick={completeQuest}>
+            Complete Quest
+          </ControlButton>
 
-          <button type="button" onClick={acceptQuest}>
-            <ChevronRight />
+          <ControlButton onButtonClick={abandonQuest}>
             Abandon quest
-          </button>
+          </ControlButton>
         </>
       )}
     </div>

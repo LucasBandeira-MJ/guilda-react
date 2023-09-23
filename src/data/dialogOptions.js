@@ -19,4 +19,12 @@ export const dialogOptions = {
     header: 'Welcome back!',
     body: 'How has this quest treated ya?',
   },
+  completed: {
+    header: 'That is awesome!',
+    body: 'congratulations on completing a quest!',
+  },
+  abandoned: {
+    header: `That's alright!`,
+    body: 'What really matters is the journey!',
+  },
 }
