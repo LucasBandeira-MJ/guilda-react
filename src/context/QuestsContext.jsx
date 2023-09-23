@@ -1,39 +1,40 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+import { dialogOptions } from '../data/dialogOptions'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 export const QuestsContext = createContext()
 
 export const QuestsProvider = ({ children }) => {
   const [questStatus, setQuestStatus] = useState('frontDesk')
-  const [dialog, setDialog] = useState({
-    header: 'Hello Adventurer!',
-    body: 'What can I help you with today?',
-  })
+  const [dialog, setDialog] = useState(dialogOptions.frontDesk)
+  const [activeQuest, setActiveQuest, clearActiveQuest] = useLocalStorage(
+    'activeQuest',
+    null,
+  )
+
+  useEffect(() => {
+    activeQuest
+      ? console.log('activeQuest: ', activeQuest)
+      : console.log('inactive')
+  }, [activeQuest])
 
   const requestQuest = () => {
     setQuestStatus('requesting')
-
-    setDialog({
-      header: 'Sure thing!',
-      body: 'Is the following quest to your liking?',
-    })
+    setDialog(dialogOptions.requesting)
   }
 
   const acceptQuest = () => {
     setQuestStatus('accepted')
+    setDialog(dialogOptions.accepted)
 
-    setDialog({
-      header: 'Glad to hear!',
-      body: 'have a nice quest!',
-    })
+    setActiveQuest('Questman')
   }
 
   const rejectQuest = () => {
     setQuestStatus('rejected')
+    setDialog(dialogOptions.rejected)
 
-    setDialog({
-      header: 'Sorry to hear...',
-      body: 'Please let me know if I can be of any more help.',
-    })
+    clearActiveQuest()
   }
 
   return (
