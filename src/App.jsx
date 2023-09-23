@@ -1,7 +1,11 @@
+import './App.styles.sass'
+
+import { DialogBox } from './components/DialogBox'
+
 function App() {
   return (
     <div className="container">
-      <h1>Hello World!</h1>
+      <DialogBox />
     </div>
   )
 }
