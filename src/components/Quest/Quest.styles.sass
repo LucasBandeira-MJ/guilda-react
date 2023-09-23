@@ -1,4 +1,19 @@
 
 .questContainer
-    box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset
+    @extend %flex-column
+
+    align-items: flex-start
+    gap: rem(12px)
+
+    width: 100%
+    padding: rem(12px)
+    border-radius: 2px
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2), 0 0 60px #8a4d0f inset
     background: #fffef0
+
+    .questTitle
+        width: 100%
+        text-align: center
+
+    span
+        font-size: rem(14px)
