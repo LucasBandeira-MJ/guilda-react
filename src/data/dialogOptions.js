@@ -15,4 +15,8 @@ export const dialogOptions = {
     header: 'Sorry to hear...',
     body: 'Please let me know if I can be of any more help.',
   },
+  returning: {
+    header: 'Welcome back!',
+    body: 'How has this quest treated ya?',
+  },
 }

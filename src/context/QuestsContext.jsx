@@ -1,37 +1,52 @@
 import { createContext, useEffect, useState } from 'react'
-import { dialogOptions } from '../data/dialogOptions'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+
+import { dialogOptions } from '../data/dialogOptions'
+import { questOptions } from '../data/questOptions'
 
 export const QuestsContext = createContext()
 
 export const QuestsProvider = ({ children }) => {
-  const [questStatus, setQuestStatus] = useState('frontDesk')
+  const [questStatus, setQuestStatus] = useState('frontdesk')
+  const [quest, setQuest] = useState({})
   const [dialog, setDialog] = useState(dialogOptions.frontDesk)
+
   const [activeQuest, setActiveQuest, clearActiveQuest] = useLocalStorage(
     'activeQuest',
     null,
   )
 
   useEffect(() => {
-    activeQuest
-      ? console.log('activeQuest: ', activeQuest)
-      : console.log('inactive')
+    if (!activeQuest) {
+      return
+    }
+
+    setDialog(dialogOptions.returning)
+    setQuestStatus('active')
+    setQuest(activeQuest)
   }, [activeQuest])
 
+  const getRandomQuest = () => {
+    const questNumber = Math.floor(Math.random() * questOptions.length)
+
+    return questOptions[questNumber]
+  }
+
   const requestQuest = () => {
-    setQuestStatus('requesting')
+    setQuestStatus('random')
     setDialog(dialogOptions.requesting)
+    setQuest(getRandomQuest())
   }
 
   const acceptQuest = () => {
     setQuestStatus('accepted')
     setDialog(dialogOptions.accepted)
 
-    setActiveQuest('Questman')
+    setActiveQuest(quest)
   }
 
   const rejectQuest = () => {
-    setQuestStatus('rejected')
+    setQuestStatus('frontdesk')
     setDialog(dialogOptions.rejected)
 
     clearActiveQuest()
@@ -41,6 +56,7 @@ export const QuestsProvider = ({ children }) => {
     <QuestsContext.Provider
       value={{
         questStatus,
+        quest,
         dialog,
         requestQuest,
         acceptQuest,
