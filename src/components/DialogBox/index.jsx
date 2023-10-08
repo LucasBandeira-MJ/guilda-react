@@ -6,7 +6,8 @@ export const DialogBox = () => {
   const { dialog } = useContext(QuestsContext)
   return (
     <div className="dialogContainer">
-      <h2>{dialog.header}</h2>
+      <h3>Guild clerk:</h3>
+      <p>{dialog.header}</p>
       <p>{dialog.body}</p>
     </div>
   )

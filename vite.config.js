@@ -24,6 +24,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@components': resolve(__dirname, './src/components'),
       '@context': resolve(__dirname, './src/context'),
+      '@img': resolve(__dirname, './src/assets/img'),
     },
   },
 })

@@ -2,18 +2,29 @@
 .questContainer
     @extend %flex-column
 
+    font-family: 'Merienda'
+
     align-items: flex-start
-    gap: rem(12px)
+    gap: rem(20px)
 
     width: 100%
-    padding: rem(12px)
+    padding: rem(20px)
+    padding-top: rem(26px)
     border-radius: 2px
-    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2), 0 0 60px #8a4d0f inset
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2), 0 0 20px #8a4d0f80 inset
     background: #fffef0
+    background: url('@img/old-paper.jpg')
 
     .questTitle
         width: 100%
         text-align: center
+        font-weight: 600
+        margin-bottom: 1rem
+
+    .flex
+        display: flex
+        align-items: center
+        gap: rem(10px)
 
     span
         font-size: rem(14px)

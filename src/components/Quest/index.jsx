@@ -8,11 +8,11 @@ export const Quest = () => {
   return (
     <div className="questContainer">
       <h2 className="questTitle">{quest.title}</h2>
-      <div>
+      <div className="flex">
         <h3>Quest type:</h3>
         <span>{quest.type}</span>
       </div>
-      <div>
+      <div className="flex">
         <h3>Difficulty:</h3>
         <span>{quest.difficulty}</span>
       </div>
